@@ -134,7 +134,7 @@ export default function SavedItemsPage() {
   };
 
   return (
-    <div className="container py-8 px-54">
+    <div className="w-full py-8 px-54">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold">Saved Items</h1>

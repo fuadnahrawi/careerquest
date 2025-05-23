@@ -103,7 +103,7 @@ export default function RoadmapBySearchPage() {
   };
   
   return (
-    <div className="container py-8 px-4 md:px-16 lg:px-32 xl:px-52">
+    <div className="w-full py-8 px-4 md:px-16 lg:px-32 xl:px-52">
       <Link href="/dashboard">
         <Button variant="outline" size="sm" className="mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Dashboard

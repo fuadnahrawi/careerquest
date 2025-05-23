@@ -79,7 +79,7 @@ export default function DashboardPage() {
       </section>
 
       {/* Features Section */}
-      <section className="container py-18 px-44">
+      <section className=" w-full py-18 px-44">
         <div className="text-center mb-12">
           <h2 className="text-sm font-medium text-muted-foreground mb-2">Features</h2>
           <h3 className="text-2xl md:text-3xl font-bold">State the art of Passion</h3>

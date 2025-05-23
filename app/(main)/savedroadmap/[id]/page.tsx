@@ -394,7 +394,7 @@ export default function SavedRoadmapPage() {
           </Link>
         </Button>
         
-        <TooltipProvider>
+        {/* <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button asChild variant="outline">
@@ -408,7 +408,7 @@ export default function SavedRoadmapPage() {
               <p>View complete career information</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider>
+        </TooltipProvider> */}
       </motion.div>
 
       {/* Notes Dialog */}
