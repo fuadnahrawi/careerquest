@@ -22,7 +22,7 @@ export default function DashboardPage() {
       title: "View Your Skill Roadmap",
       description: "See what skills you need to develop",
       image: "/hello.svg",
-      link: "/roadmap"
+      link: "/roadmapBySearch"
     }
   ]
 

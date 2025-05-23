@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Bookmark } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 export function Header() {
@@ -21,7 +21,8 @@ export function Header() {
     { name: "Home", href: "/dashboard" },
     { name: "Career Assessment", href: "/assessment" },
     { name: "Career Exploration", href: "/exploration" },
-    { name: "Skill Roadmap", href: "/roadmap" },
+    { name: "Skill Roadmap", href: "/roadmapBySearch" },
+    { name: "Saved Items", href: "/saved", icon: <Bookmark className="w-4 h-4 ml-1 mt-0.75" /> }
   ];
 
   return (
@@ -41,13 +42,14 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-sm font-medium transition-colors hover:text-primary flex items-center",
                   pathname === item.href
                     ? "text-primary"
                     : "text-muted-foreground"
                 )}
               >
                 {item.name}
+                {item.icon}
               </Link>
             ))}
           </nav>
@@ -96,7 +98,7 @@ export function Header() {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary",
+                  "text-sm font-medium transition-colors hover:text-primary flex items-center",
                   pathname === item.href
                     ? "text-primary"
                     : "text-muted-foreground"
@@ -104,6 +106,7 @@ export function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.name}
+                {item.icon}
               </Link>
             ))}
             <Button variant="default" size="sm" className="w-full">
