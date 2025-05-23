@@ -477,9 +477,30 @@ export default function CareerDetailPage() {
                         </ul>
                       </div>
                     )}
+                  
+                  {/* UniKL Programs CTA */}
+                  <div className="mt-6 border-t pt-4">
+                    <div className="bg-amber-50 dark:bg-amber-950/40 p-4 rounded-lg border border-amber-200 dark:border-amber-800/60">
+                      <h4 className="font-medium text-amber-700 dark:text-amber-300 mb-2">
+                        Ready to take the next step in your education?
+                      </h4>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Explore programs offered by UniKL that can help you prepare for this career.
+                      </p>
+                      <Button 
+                        className="w-full bg-[#F1AE39] hover:bg-[#E09C28] text-white"
+                        onClick={() => window.open("https://www.unikl.edu.my/programs/by-levels-of-study/", "_blank")}
+                      >
+                        <GraduationCap className="mr-2 h-4 w-4" />
+                        Explore UniKL Programs
+                        <ExternalLink className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             )}
+          
           {job_outlook &&
             (job_outlook.outlook ||
               job_outlook.bright_outlook ||
@@ -549,6 +570,35 @@ export default function CareerDetailPage() {
                           </li>
                         )}
                       </ul>
+                      
+                      {/* Malaysian Ringgit conversion - static conversion rate */}
+                      <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-950/40 rounded-md border border-blue-200 dark:border-blue-800/60">
+                        <h4 className="font-medium text-blue-700 dark:text-blue-300 text-sm">Approximate Salary in Malaysian Ringgit (RM)</h4>
+                        <p className="text-xs text-muted-foreground mb-2">Using average conversion rate: 1 USD ≈ 4.5 MYR</p>
+                        <ul className="list-disc pl-5 space-y-1 text-sm text-muted-foreground">
+                          {job_outlook.salary.annual_10th_percentile && (
+                            <li>
+                              10th Percentile: RM {(job_outlook.salary.annual_10th_percentile * 4.5).toLocaleString(undefined, {maximumFractionDigits: 0})}
+                            </li>
+                          )}
+                          {job_outlook.salary.annual_median && (
+                            <li>
+                              Median: RM {(job_outlook.salary.annual_median * 4.5).toLocaleString(undefined, {maximumFractionDigits: 0})}
+                            </li>
+                          )}
+                          {job_outlook.salary.annual_90th_percentile && (
+                            <li>
+                              90th Percentile: RM {(job_outlook.salary.annual_90th_percentile * 4.5).toLocaleString(undefined, {maximumFractionDigits: 0})}
+                            </li>
+                          )}
+                          {job_outlook.salary.annual_median_over && (
+                            <li className="text-amber-600">
+                              Median: Over RM {(job_outlook.salary.annual_median_over * 4.5).toLocaleString(undefined, {maximumFractionDigits: 0})}
+                            </li>
+                          )}
+                        </ul>
+                        <p className="text-xs text-muted-foreground mt-2 italic">Note: Actual salaries in Malaysia may vary based on local market conditions.</p>
+                      </div>
                     </div>
                   )}
                 </CardContent>

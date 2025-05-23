@@ -2,18 +2,15 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Bookmark, LogOut, LogIn } from "lucide-react";
+import { ArrowRight, Bookmark } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useSession, signOut, signIn } from "next-auth/react";
 
 export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { data: session } = useSession();
-  const router = useRouter();
 
   // Scroll animation setup
   const { scrollY } = useScroll();
@@ -27,15 +24,6 @@ export function Header() {
     { name: "Skill Roadmap", href: "/roadmapBySearch" },
     { name: "Saved Items", href: "/saved", icon: <Bookmark className="w-4 h-4 ml-1 mt-0.75" /> }
   ];
-
-  const handleAuthAction = async () => {
-    if (session) {
-      await signOut({ redirect: false });
-      router.push("/login");
-    } else {
-      router.push("/login");
-    }
-  };
 
   return (
     <motion.header
@@ -69,32 +57,13 @@ export function Header() {
 
         <div className="flex items-center gap-4">
           <Button
-            variant="outline"
-            size="sm"
-            onClick={handleAuthAction}
-            className="hidden md:flex items-center justify-center gap-2"
-          >
-            {session ? (
-              <>
-                <span>Logout</span>
-                <LogOut size={16} />
-              </>
-            ) : (
-              <>
-                <span>Login</span>
-                <LogIn size={16} />
-              </>
-            )}
-          </Button>
-
-          {/* <Button
             variant="default"
             size="sm"
             className="hidden md:flex items-center justify-center gap-2"
           >
             <span className="inline-flex items-center pb-0.5">GET STARTED</span>
             <ArrowRight size={16} />
-          </Button> */}
+          </Button>
 
           <button
             className="md:hidden"
@@ -142,24 +111,6 @@ export function Header() {
             ))}
             <Button variant="default" size="sm" className="w-full">
               GET STARTED
-            </Button>
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={handleAuthAction}
-              className="w-full flex items-center justify-center gap-2"
-            >
-              {session ? (
-                <>
-                  <span>Logout</span>
-                  <LogOut size={16} />
-                </>
-              ) : (
-                <>
-                  <span>Login</span>
-                  <LogIn size={16} />
-                </>
-              )}
             </Button>
           </div>
         </div>
