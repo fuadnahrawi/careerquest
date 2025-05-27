@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, Briefcase, FilterX, Loader2, Search, ListFilter, Building } from "lucide-react";
+import { ArrowLeft, Briefcase, Loader2, Search, ListFilter, Building } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -46,7 +46,8 @@ type ViewMode = "interest" | "all" | "industry" | "search";
 
 const ITEMS_PER_PAGE = 20; // Default items per page from O*NET API
 
-export default function CareerExplorationPage() {
+// This is the component that uses useSearchParams
+function CareerExplorationContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
@@ -669,5 +670,18 @@ export default function CareerExplorationPage() {
         </div>
       )}
     </div>
+  );
+}
+
+// This is the main page component that wraps the content in a Suspense boundary
+export default function CareerExplorationPage() {
+  return (
+    <Suspense fallback={
+      <div className="container py-10 max-w-6xl mx-auto flex items-center justify-center min-h-[50vh]">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    }>
+      <CareerExplorationContent />
+    </Suspense>
   );
 }
