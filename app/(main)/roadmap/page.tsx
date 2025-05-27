@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Bookmark, ChevronRight, Sparkles } from "lucide-react";
@@ -28,13 +28,21 @@ interface SkillRoadmap {
   skillNodes: SkillNode[];
 }
 
-export default function SkillRoadmapPage() {
+interface CareerDetails {
+  code: string;
+  title: string;
+  description: string;
+  interests: string[];
+}
+
+// Create a client component that uses useSearchParams
+function RoadmapContent() {
   const searchParams = useSearchParams();
   const careerCode = searchParams?.get("career") || "";
   const careerTitle = searchParams?.get("title") || "Software Developer";
   const [loading, setLoading] = useState(true);
   const [roadmap, setRoadmap] = useState<SkillRoadmap | null>(null);
-  const [careerDetails, setCareerDetails] = useState<any>(null); // This holds description and interests
+  const [careerDetails, setCareerDetails] = useState<CareerDetails | null>(null);
   const [completedSkills, setCompletedSkills] = useState<Record<string, boolean>>({});
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   
@@ -46,7 +54,7 @@ export default function SkillRoadmapPage() {
       // const data = await response.json();
       
       // For now, use mock data
-      const mockCareerDetails = {
+      const mockCareerDetails: CareerDetails = {
         code: careerCode || "15-1252.00",
         title: careerTitle || "Software Developer",
         description: "Research, design, and develop computer and network software or specialized utility programs. Analyze user needs and develop software solutions, applying principles and techniques of computer science, engineering, and mathematical analysis.",
@@ -367,5 +375,29 @@ export default function SkillRoadmapPage() {
         />
       )}
     </div>
+  );
+}
+
+// Loading component for Suspense fallback
+function LoadingRoadmap() {
+  return (
+    <div className="flex items-center justify-center min-h-[70vh]">
+      <div className="text-center">
+        <div className="mx-auto mb-6 w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full">
+          <Sparkles className="h-8 w-8 text-primary" />
+        </div>
+        <h3 className="font-medium text-lg">Loading roadmap data...</h3>
+        <p className="text-muted-foreground mt-2">Please wait a moment</p>
+      </div>
+    </div>
+  );
+}
+
+// Main component that wraps RoadmapContent with Suspense
+export default function SkillRoadmapPage() {
+  return (
+    <Suspense fallback={<LoadingRoadmap />}>
+      <RoadmapContent />
+    </Suspense>
   );
 }
