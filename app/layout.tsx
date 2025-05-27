@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Library Management",
-  description: "Library Management Application",
+  title: "CareerQuest",
+  description: "CareerQuest: Unlocking Potential for High School Students",
 };
 
 export default function RootLayout({
